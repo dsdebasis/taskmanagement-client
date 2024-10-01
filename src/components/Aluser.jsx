@@ -12,7 +12,7 @@ useEffect(()=>{
     axios.get(`${backendUrl}/api/v1/tasks/get-users`,{
       withCredentials:true
     }).then((res)=>{
-      console.log(res.data.data)
+      // console.log(res.data.data)
       setUsers(res.data.data)
     }).catch((error)=>{
 

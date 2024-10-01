@@ -4,7 +4,10 @@ const UserContext = createContext({});
 
 const UserContextProvider = ({ children }) => {
   const [userContextInfo, setUserContext] = useState({
-    name: "",role:"",userid:"",_id:""
+    name: "",
+    role: "",
+    userid: "",
+    _id: "",
   });
 
   useEffect(() => {
@@ -29,7 +32,6 @@ const UserContextProvider = ({ children }) => {
       {children}
     </UserContext.Provider>
   );
-
 };
- const useAuth = ()=>useContext(UserContext);
-export {UserContextProvider,useAuth,UserContext}
+const useAuth = () => useContext(UserContext);
+export { UserContextProvider, useAuth, UserContext };

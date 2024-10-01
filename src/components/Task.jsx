@@ -1,7 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useDelete } from "../hooks/useDelete.js";
-import { useGetTask } from "../hooks/useGetTask.js";
+import EditTask from "./EditTask.jsx";
 function Task({
   title = "title",
   description = "description",
@@ -10,15 +8,19 @@ function Task({
   dueDate,
   assignedUser,
   id,
-  handleDelete
+  handleDelete,
 }) {
- 
-  
+  const [editBtn, setEditBtn] = React.useState(false);
 
+  const [taskId, setTaskId] = React.useState("");
+  const handleEdit = function (e) {
+    e.preventDefault();
+    setTaskId(e.target.id);
+    setEditBtn(!editBtn);
+  };
 
-  
   return (
-    <section className=" w-fit flex justify-center items-center p-1" >
+    <section className=" w-fit flex justify-center items-center p-1">
       <section className="h-auto w-auto md:max-h-fit md:w-[20vw] border-2 border-black rounded-2xl shadow-xl p-2 flex flex-col gap-y-1 font-mono ">
         <span className="text-sm text-center bg-blue-400 rounded-md  text-white">
           {title}
@@ -54,12 +56,24 @@ function Task({
           </div>
         </div>
         <div className="inline-flex justify-around">
-        
-          <button  type="submit" className=" px-3  bg-yellow-800 text-white hover:bg-yellow-600 hover:text-black">
+          <button
+            id={id}
+            className=" px-3  bg-yellow-800 text-white hover:bg-yellow-600 hover:text-black"
+            onClick={handleEdit}
+          >
             Edit
           </button>
-          <button onClick={handleDelete} id={id}  className=" px-1  bg-red-500 text-white hover:bg-yellow-600 hover:text-black text-xs">
-            Delete 
+          {editBtn ? (
+            <EditTask id={taskId} closePopup={() => setEditBtn(false)} />
+          ) : (
+            <></>
+          )}
+          <button
+            onClick={handleDelete}
+            id={id}
+            className=" px-1  bg-red-500 text-white hover:bg-yellow-600 hover:text-black text-xs"
+          >
+            Delete
           </button>
         </div>
       </section>
